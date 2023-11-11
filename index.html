@@ -1,0 +1,128 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .image{
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+        button{
+            background: transparent;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            color: wheat;
+        }
+        .result-img{
+            width: 50px;
+            height: 50px;
+        }
+        .normal{
+            background-color: white;
+            color: black;
+            border-radius: 0;
+            width: 80px;
+            
+            height: 30px;
+        }
+    </style>
+    <body>
+        <h1>Rock Paper Scissors</h1>
+        <button onclick="
+    let computerValue=computerNumber();
+        result('rock',computerValue);
+        "><img src="rock-emoji.png" class="image"></button>
+        
+        <button onclick="   
+        computerValue=computerNumber();
+        result('paper',computerValue);
+        "><img src="paper-emoji.png" class="image"></button>
+        
+        <button onclick="   
+        computerValue=computerNumber();
+        result('Scissors',computerValue);
+        "><img src="scissors-emoji.png" class="image"></button>
+
+        <h3 class="result"></h1>
+            <h1 class="wins"></h3>
+                <h3 class="scores"></h3>
+        <p></p>
+        <button class="normal" onclick="
+        score.wins=0;
+        score.losses=0;
+        score.ties=0;
+        ">reset</button>
+        
+        <script>
+            const score={
+                wins:0,
+                losses:0,
+                ties:0
+            };
+
+                function computerNumber(){
+                    let randomNumer=Math.random();
+            let computerNumber='';
+            if (randomNumer>=0 && randomNumer<1/3){
+                computerNumber='rock';
+            }
+            else if(randomNumer>=1/3 && randomNumer<2/3){
+                computerNumber='paper';
+            }
+            else{
+                computerNumber='Scissors';
+            }
+            return computerNumber;
+            }
+
+        function result(value,computerValue){
+            
+        if(computerValue===value){
+            finalResult='tie';
+        }
+        else if(value=='rock'){
+            if(computerValue==='paper'){
+            finalResult='computer wins';
+        }
+        else{ finalResult='you win'}
+    }
+    else if(value=='paper'){
+            if(computerValue==='Scissors'){
+            finalResult='computer wins';
+        }
+        else{ finalResult='you win'}
+    }
+    else if(value=='Scissors'){
+            if(computerValue==='rock'){
+            finalResult='computer wins';
+        }
+        else{ finalResult='you win'}
+    }
+    if(finalResult==='you win'){
+        score.wins+=1;
+    }
+    else if(finalResult==='tie'){
+        score.ties+=1;
+    }
+    else{
+        score.losses+=1;
+    }
+    document.querySelector('.result').innerHTML=(`You: <img src="${value}-emoji.png" class="result-img"> Computer: <img src="${computerValue}-emoji.png" class="result-img">.`);
+    document.querySelector('.wins').innerHTML=` ${finalResult}!`;
+    document.querySelector('.scores').innerHTML=`Wins:${score.wins}, Losses:${score.losses},Ties:${score.ties}.`;
+        }
+        </script>
+    </body>
+    </html>
